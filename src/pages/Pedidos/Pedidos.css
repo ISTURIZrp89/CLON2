@@ -1,0 +1,87 @@
+.tabs-container {
+  margin: 1rem 0;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 1rem;
+}
+
+.tab {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-hover);
+}
+
+.tab.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+  background-color: var(--bg-light);
+}
+
+.article-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  background: var(--bg-secondary);
+}
+
+.insufficient-stock {
+  background-color: var(--danger-bg) !important;
+  color: var(--danger-color) !important;
+}
+
+.sufficient-stock {
+  background-color: var(--success-bg) !important;
+  color: var(--success-color) !important;
+}
+
+.borradores-list {
+  display: grid;
+  gap: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.borrador-card {
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-secondary);
+}
+
+.borrador-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.borrador-info {
+  margin: 0.5rem 0;
+}
+
+.borrador-info p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.borrador-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}

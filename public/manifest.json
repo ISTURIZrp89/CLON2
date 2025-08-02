@@ -1,0 +1,71 @@
+{
+  "short_name": "LabFlow",
+  "name": "LabFlow Manager - Sistema de Gestión de Laboratorio",
+  "description": "Sistema integral de gestión para laboratorios con control de inventario, movimientos y usuarios",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable any"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#4682B4",
+  "background_color": "#1a202c",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "business", "medical"],
+  "lang": "es",
+  "dir": "ltr",
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "Movimientos Rápidos",
+      "short_name": "Movimientos",
+      "description": "Crear movimientos de inventario rápidamente",
+      "url": "/movimientos?quick=true",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Insumos",
+      "short_name": "Insumos",
+      "description": "Gestionar inventario de insumos",
+      "url": "/insumos",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "short_name": "Panel",
+      "description": "Ver resumen del laboratorio",
+      "url": "/dashboard",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

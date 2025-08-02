@@ -1,0 +1,490 @@
+.configuracion-page {
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: var(--bg-primary);
+  min-height: 100vh;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-title i {
+  font-size: 2rem;
+  color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-title h1 {
+  margin: 0;
+  color: var(--text-primary) !important;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  color: var(--text-secondary) !important;
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin: 0.25rem 0 0 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Navegación por pestañas */
+.tabs-navigation {
+  display: flex;
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius-lg);
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+  overflow-x: auto;
+  gap: 0.25rem;
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  font-weight: 500;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  min-width: fit-content;
+}
+
+.tab-button:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-secondary);
+}
+
+.tab-button.active {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-button i {
+  font-size: 1.1rem;
+}
+
+.configuracion-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Secciones de configuración */
+.config-section {
+  background: var(--bg-primary);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  animation: fadeInUp 0.3s ease;
+}
+
+.section-header {
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-header i {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-header h2 {
+  margin: 0;
+  color: var(--text-primary) !important;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.section-content {
+  padding: 2rem;
+}
+
+/* Formularios mejorados */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-row:last-child {
+  margin-bottom: 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+}
+
+.form-input,
+.form-select {
+  padding: 0.875rem 1rem !important;
+  border: 1.5px solid var(--border-color) !important;
+  border-radius: var(--border-radius-md) !important;
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+  transition: all var(--transition-normal) !important;
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  font-family: inherit !important;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none !important;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1) !important;
+  background: var(--bg-primary) !important;
+}
+
+.form-input:disabled,
+.form-select:disabled {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-quaternary) !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
+
+.form-input::placeholder {
+  color: var(--text-quaternary) !important;
+  font-style: italic;
+}
+
+/* Checkboxes mejorados */
+.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.checkbox-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  cursor: pointer !important;
+  font-weight: 500 !important;
+  color: var(--text-primary) !important;
+  margin: 0 !important;
+  font-size: 0.875rem !important;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 1.125rem !important;
+  height: 1.125rem !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  accent-color: var(--primary-color) !important;
+  border-radius: var(--border-radius-sm) !important;
+}
+
+.checkmark {
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 2px solid var(--border-medium);
+  border-radius: var(--border-radius-sm);
+  position: relative;
+  transition: all var(--transition-normal);
+  background: var(--bg-primary);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* Botones mejorados */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  font-weight: 500;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  letter-spacing: 0.025em;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, var(--warning-color), var(--warning-light));
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-warning:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Estados de carga */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Efectos y animaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.config-section {
+  animation: fadeInUp 0.4s ease;
+}
+
+/* Estados de validación */
+.form-input.error {
+  border-color: var(--danger-color) !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+}
+
+.form-input.success {
+  border-color: var(--success-color) !important;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1) !important;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .configuracion-page {
+    padding: 1rem;
+  }
+  
+  .page-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .header-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .tabs-navigation {
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .configuracion-page {
+    padding: 0.75rem;
+  }
+  
+  .section-content {
+    padding: 1rem;
+  }
+  
+  .page-title h1 {
+    font-size: 1.5rem;
+  }
+  
+  .page-title i {
+    font-size: 1.5rem;
+  }
+  
+  .tab-button {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabs-navigation {
+    padding: 0.25rem;
+  }
+  
+  .tab-button span {
+    display: none;
+  }
+  
+  .tab-button {
+    justify-content: center;
+    min-width: 3rem;
+  }
+}
+
+/* Scrollbar personalizado */
+.tabs-navigation::-webkit-scrollbar {
+  height: 4px;
+}
+
+.tabs-navigation::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+  border-radius: var(--border-radius-full);
+}
+
+.tabs-navigation::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: var(--border-radius-full);
+}
+
+.tabs-navigation::-webkit-scrollbar-thumb:hover {
+  background: var(--border-dark);
+}
+
+/* Efectos hover mejorados */
+.config-section:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.form-input:hover:not(:focus):not(:disabled),
+.form-select:hover:not(:focus):not(:disabled) {
+  border-color: var(--border-medium) !important;
+}
+
+/* Indicadores de estado */
+.form-group.required label::after {
+  content: " *";
+  color: var(--danger-color);
+  font-weight: bold;
+}
+
+.form-group.optional label::after {
+  content: " (opcional)";
+  color: var(--text-quaternary);
+  font-weight: normal;
+  font-size: 0.8rem;
+}
+
+/* Grupos de campos */
+.field-group {
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  border: 1px solid var(--border-light);
+}
+
+.field-group + .field-group {
+  margin-top: 1rem;
+}
+
+/* Tooltips y ayuda */
+.help-text {
+  font-size: 0.8rem;
+  color: var(--text-quaternary);
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+/* Mejoras de accesibilidad */
+.form-input:focus-visible,
+.form-select:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Animaciones suaves */
+.form-input,
+.form-select,
+.btn,
+.config-section {
+  transition: all var(--transition-normal);
+}
