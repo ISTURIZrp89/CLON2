@@ -60,7 +60,6 @@ const Equipos = () => {
     }
 
     try {
-      setLoading(true);
       const equipoData = {
         ...formData,
         costo_adquisicion: parseFloat(formData.costo_adquisicion) || 0,
@@ -389,7 +388,7 @@ const Equipos = () => {
                 </div>
                 
                 <div className="form-group">
-                  <label htmlFor="categoria">Categor��a *</label>
+                  <label htmlFor="categoria">Categoría *</label>
                   <select
                     id="categoria"
                     value={formData.categoria}
