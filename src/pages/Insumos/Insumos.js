@@ -350,8 +350,6 @@ const Insumos = () => {
     } catch (error) {
       console.error('Error saving lote:', error);
       showError('Error', 'Error al guardar el lote');
-    } finally {
-      setLoading(false);
     }
   };
 
