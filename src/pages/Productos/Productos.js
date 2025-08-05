@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNotification } from '../../contexts/NotificationContext';
 import firebaseService from '../../services/FirebaseService';
 import Button from '../../components/UI/Button';
-import ConnectionStatus from '../../components/UI/ConnectionStatus';
+
 import useOfflineData from '../../hooks/useOfflineData';
 import './Productos.css';
 
