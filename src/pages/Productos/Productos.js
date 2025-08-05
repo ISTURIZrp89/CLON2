@@ -68,11 +68,7 @@ const Productos = () => {
     }
   }, [error, showError]);
 
-  // Función de refresh
-  const handleRefresh = () => {
-    refresh();
-    showSuccess('Actualizado', `Productos actualizados ${isOffline ? '(modo offline)' : ''}`);
-  };
+
 
   // Search filtering effect
   useEffect(() => {
