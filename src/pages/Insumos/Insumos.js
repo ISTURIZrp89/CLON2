@@ -579,7 +579,6 @@ const Insumos = () => {
                 if (result.success) {
                   showSuccess('Sincronización completa', `Procesados: ${result.results.processed}, Actualizados: ${result.results.updated}`);
                   await refresh();
-                  await loadLotes();
                 } else {
                   showError('Error', 'Error en la sincronización: ' + result.error);
                 }
