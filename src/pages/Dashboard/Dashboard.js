@@ -110,6 +110,7 @@ const Dashboard = () => {
       loadAlerts();
       loadRecentActivity();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const updateKPIs = () => {
