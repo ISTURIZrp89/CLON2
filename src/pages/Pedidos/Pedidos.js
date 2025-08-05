@@ -53,35 +53,20 @@ const Pedidos = () => {
     notas: ''
   });
 
-  const loadPedidos = useCallback(async () => {
+  const loadBorradores = useCallback(async () => {
     try {
-      setLoading(true);
       const result = await firebaseService.getAll('requisiciones');
       if (result.success) {
         const allRequisiciones = result.data || [];
-        setPedidos(allRequisiciones.filter(req => req.estado !== 'borrador'));
         setBorradores(allRequisiciones.filter(req => req.estado === 'borrador'));
       } else {
-        showError('Error', 'No se pudieron cargar las requisiciones');
+        showError('Error', 'No se pudieron cargar los borradores');
       }
     } catch (error) {
-      console.error('Error loading requisiciones:', error);
-      showError('Error', 'Error al cargar requisiciones');
-    } finally {
-      setLoading(false);
+      console.error('Error loading borradores:', error);
+      showError('Error', 'Error al cargar borradores');
     }
   }, [showError]);
-
-  const loadInsumos = useCallback(async () => {
-    try {
-      const result = await firebaseService.getAll('insumos');
-      if (result.success) {
-        setInsumos(result.data || []);
-      }
-    } catch (error) {
-      console.error('Error loading insumos:', error);
-    }
-  }, []);
 
   useEffect(() => {
     loadPedidos();
