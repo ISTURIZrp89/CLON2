@@ -9,6 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout/Layout';
 import Login from './pages/Login/Login';
 import Dashboard from './pages/Dashboard/Dashboard';
+import Equipos from './pages/Equipos/Equipos';
 
 function App() {
   return (
@@ -26,6 +27,13 @@ function App() {
                       <ProtectedRoute>
                         <Layout>
                           <Dashboard />
+                        </Layout>
+                      </ProtectedRoute>
+                    } />
+                    <Route path="/equipos" element={
+                      <ProtectedRoute>
+                        <Layout>
+                          <Equipos />
                         </Layout>
                       </ProtectedRoute>
                     } />
