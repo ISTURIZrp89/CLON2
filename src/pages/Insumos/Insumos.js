@@ -392,7 +392,6 @@ const Insumos = () => {
     }
 
     try {
-      setLoading(true);
       const insumoData = {
         ...formData,
         codigo: codigo,
