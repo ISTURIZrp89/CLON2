@@ -416,7 +416,7 @@ const Productos = () => {
                 variant="secondary"
                 icon="mdi-refresh"
                 onClick={() => {
-                  loadProductos();
+                  refresh();
                   showSuccess('Actualizado', 'Lista de productos actualizada');
                 }}
               >
