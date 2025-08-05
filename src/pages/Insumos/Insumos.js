@@ -196,12 +196,8 @@ const Insumos = () => {
           }
         }
 
-        setFilteredInsumos(insumosData);
-
-        // Load lotes after insumos are set
-        if (insumosData.length > 0) {
-          loadLotes(insumosData);
-        }
+        // setFilteredInsumos(insumosData); - handled by useEffect hook
+        // loadLotes call removed - data managed by useOfflineData hook
       } else {
         showError('Error', 'No se pudieron cargar los insumos');
       }
