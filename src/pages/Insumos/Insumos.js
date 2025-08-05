@@ -467,8 +467,6 @@ const Insumos = () => {
     } catch (error) {
       console.error('Error saving insumo:', error);
       showError('Error', 'Error al guardar el insumo');
-    } finally {
-      setLoading(false);
     }
   };
 
