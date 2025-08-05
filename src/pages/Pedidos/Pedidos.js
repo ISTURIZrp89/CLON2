@@ -139,13 +139,12 @@ const Pedidos = () => {
         }
       }
 
-      await loadPedidos();
+      await pedidosData.refresh();
+      await loadBorradores();
       handleCloseModal();
     } catch (error) {
       console.error('Error saving pedido:', error);
       showError('Error', 'Error al guardar el pedido');
-    } finally {
-      setLoading(false);
     }
   };
 
