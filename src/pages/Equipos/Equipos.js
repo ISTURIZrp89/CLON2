@@ -13,12 +13,7 @@ const Equipos = () => {
   const {
     data: equipos,
     loading,
-    error,
-    refresh,
-    createDocument,
-    updateDocument,
-    deleteDocument,
-    isOffline
+    refresh
   } = useOfflineData('equipos', {
     orderBy: 'nombre',
     orderDirection: 'asc',
