@@ -7,7 +7,7 @@ import ConnectionStatus from '../../components/UI/ConnectionStatus';
 import useOfflineData from '../../hooks/useOfflineData';
 
 const Equipos = () => {
-  const { showSuccess, showError, showWarning } = useNotification();
+  const { showSuccess, showError } = useNotification();
 
   // Hook de persistencia offline
   const {
