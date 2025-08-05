@@ -559,8 +559,7 @@ const Insumos = () => {
             variant="secondary"
             icon="mdi-refresh"
             onClick={() => {
-              loadInsumos();
-              loadLotes();
+              refresh();
               showSuccess('Actualizado', 'Lista de insumos actualizada');
             }}
           >
