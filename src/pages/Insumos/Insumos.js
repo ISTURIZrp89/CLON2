@@ -407,7 +407,7 @@ const Insumos = () => {
           }
 
           await refresh();
-          await loadLotes();
+          // loadLotes call removed - data managed by useOfflineData hook
           handleCloseModal();
         } else {
           showError('Error', 'No se pudo actualizar el insumo');
@@ -437,7 +437,7 @@ const Insumos = () => {
           }
 
           await refresh();
-          await loadLotes();
+          // loadLotes call removed - data managed by useOfflineData hook
           handleCloseModal();
         } else {
           showError('Error', 'No se pudo crear el insumo');
@@ -478,7 +478,7 @@ const Insumos = () => {
           showSuccess('Éxito', 'Insumo eliminado correctamente');
           // Force reload after deletion
           await refresh();
-          await loadLotes(); // Also reload lotes in case they were related
+          // loadLotes call removed - data managed by useOfflineData hook // Also reload lotes in case they were related
         } else {
           showError('Error', 'No se pudo eliminar el insumo');
         }
