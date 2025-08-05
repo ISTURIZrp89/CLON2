@@ -21,8 +21,8 @@ const Dashboard = () => {
   const pedidosFinalizadosData = useOfflineData('pedidos_finalizados', { enableRealTime: false, refreshInterval: 60000 });
   const ajustesData = useOfflineData('ajustes', { enableRealTime: false, refreshInterval: 60000 });
 
-  // Estado consolidado para compatibilidad
-  const data = {
+  // Estado consolidado para compatibilidad - memoized to prevent infinite re-renders
+  const data = useMemo(() => ({
     insumos: insumosData.data,
     lotes: lotesData.data,
     productos: productosData.data,
@@ -32,7 +32,17 @@ const Dashboard = () => {
     ventas: ventasData.data,
     pedidosFinalizados: pedidosFinalizadosData.data,
     ajustes: ajustesData.data
-  };
+  }), [
+    insumosData.data,
+    lotesData.data,
+    productosData.data,
+    pedidosData.data,
+    usuariosData.data,
+    equiposData.data,
+    ventasData.data,
+    pedidosFinalizadosData.data,
+    ajustesData.data
+  ]);
 
   // Loading global: true si alguno está cargando
   const loading = insumosData.loading || lotesData.loading || productosData.loading ||
