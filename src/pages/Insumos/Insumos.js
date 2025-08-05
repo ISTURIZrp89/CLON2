@@ -207,19 +207,7 @@ const Insumos = () => {
     }
   };
 
-  const loadLotes = async (insumosData = null) => {
-    try {
-      const result = await firebaseService.getAll('lotes');
-      if (result.success) {
-        let lotesData = result.data || [];
-        // Real lotes data from Firebase
-
-        // Lotes data is managed by useOfflineData hook
-      }
-    } catch (error) {
-      console.error('Error loading lotes:', error);
-    }
-  };
+  // loadLotes removed - data loading is handled by useOfflineData hook
 
   const getLotesForInsumo = (insumoId) => {
     return lotes.filter(lote => lote.insumo_id === insumoId);
