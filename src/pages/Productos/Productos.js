@@ -166,13 +166,11 @@ const Productos = () => {
         }
       }
 
-      await loadProductos();
+      await refresh();
       handleCloseModal();
     } catch (error) {
       console.error('Error saving producto:', error);
       showError('Error', 'Error al guardar el producto');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -987,7 +985,7 @@ const Productos = () => {
                     <option value="activo">Activo</option>
                     <option value="inactivo">Inactivo</option>
                     <option value="mantenimiento">En Mantenimiento</option>
-                    <option value="reparacion">En Reparación</option>
+                    <option value="reparacion">En Reparaci��n</option>
                     <option value="baja">Dado de Baja</option>
                   </select>
                 </div>
