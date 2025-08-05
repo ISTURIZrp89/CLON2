@@ -5,6 +5,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { NotificationProvider } from './contexts/NotificationContext';
 import { SidebarProvider } from './contexts/SidebarContext';
 import { ConfigProvider } from './contexts/ConfigContext';
+import Login from './pages/Login/Login';
 
 function App() {
   return (
@@ -15,10 +16,14 @@ function App() {
             <SidebarProvider>
               <ConfigProvider>
                 <div className="App">
-                  <h1>LabFlow Manager - Test with All Providers</h1>
-                  <p>If you can see this, all providers are working!</p>
                   <Routes>
-                    <Route path="*" element={<div>Default route working</div>} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="*" element={
+                      <div>
+                        <h1>LabFlow Manager - Working!</h1>
+                        <p>Navigate to <a href="/login">/login</a> to test Login component</p>
+                      </div>
+                    } />
                   </Routes>
                 </div>
               </ConfigProvider>
