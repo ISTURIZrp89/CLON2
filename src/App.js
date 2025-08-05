@@ -10,6 +10,7 @@ import Layout from './components/Layout/Layout';
 import Login from './pages/Login/Login';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Equipos from './pages/Equipos/Equipos';
+import Productos from './pages/Productos/Productos';
 
 function App() {
   return (
@@ -34,6 +35,13 @@ function App() {
                       <ProtectedRoute>
                         <Layout>
                           <Equipos />
+                        </Layout>
+                      </ProtectedRoute>
+                    } />
+                    <Route path="/productos" element={
+                      <ProtectedRoute>
+                        <Layout>
+                          <Productos />
                         </Layout>
                       </ProtectedRoute>
                     } />
