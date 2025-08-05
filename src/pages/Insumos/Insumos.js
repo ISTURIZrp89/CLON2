@@ -267,7 +267,6 @@ const Insumos = () => {
             showWarning('Éxito parcial', 'Lote eliminado pero hubo problemas en la sincronización');
           }
 
-          await loadLotes();
           await refresh();
         } else {
           showError('Error', 'No se pudo eliminar el lote');
@@ -314,7 +313,6 @@ const Insumos = () => {
             showWarning('Éxito parcial', 'Lote actualizado pero hubo problemas en la sincronización');
           }
 
-          await loadLotes();
           await refresh();
           handleCloseLoteModal();
         } else {
@@ -339,7 +337,6 @@ const Insumos = () => {
             showWarning('Éxito parcial', 'Lote creado pero hubo problemas en la sincronización');
           }
 
-          await loadLotes();
           await refresh();
           handleCloseLoteModal();
         } else {
