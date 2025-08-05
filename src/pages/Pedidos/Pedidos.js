@@ -33,7 +33,6 @@ const Pedidos = () => {
   const pedidos = pedidosData.data;
   const insumos = insumosData.data;
   const loading = pedidosData.loading || insumosData.loading;
-  const isOffline = pedidosData.isOffline || insumosData.isOffline;
 
   const [borradores, setBorradores] = useState([]);
   const [showModal, setShowModal] = useState(false);
