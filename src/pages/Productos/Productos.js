@@ -326,8 +326,6 @@ const Productos = () => {
     }
 
     try {
-      setLoading(true);
-
       const pedidoData = {
         numero: generateOrderNumber(),
         tipo: 'productos',
