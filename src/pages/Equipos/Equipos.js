@@ -123,7 +123,7 @@ const Equipos = () => {
         const result = await firebaseService.delete('equipos', equipo.id);
         if (result.success) {
           showSuccess('Éxito', 'Equipo eliminado correctamente');
-          await loadEquipos();
+          await refresh();
         } else {
           showError('Error', 'No se pudo eliminar el equipo');
         }
