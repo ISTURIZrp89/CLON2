@@ -196,7 +196,6 @@ const Insumos = () => {
           }
         }
 
-        setInsumos(insumosData);
         setFilteredInsumos(insumosData);
 
         // Load lotes after insumos are set
