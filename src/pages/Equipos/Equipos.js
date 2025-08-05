@@ -157,7 +157,7 @@ const Equipos = () => {
       });
 
       showSuccess('Éxito', 'Mantenimiento registrado correctamente');
-      await loadEquipos();
+      await refresh();
     } catch (error) {
       console.error('Error registering maintenance:', error);
       showError('Error', 'Error al registrar el mantenimiento');
