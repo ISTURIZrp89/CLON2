@@ -84,13 +84,11 @@ const Equipos = () => {
         }
       }
 
-      await loadEquipos();
+      await refresh();
       handleCloseModal();
     } catch (error) {
       console.error('Error saving equipo:', error);
       showError('Error', 'Error al guardar el equipo');
-    } finally {
-      setLoading(false);
     }
   };
 
