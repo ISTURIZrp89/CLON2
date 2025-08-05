@@ -218,7 +218,7 @@ const Insumos = () => {
         let lotesData = result.data || [];
         // Real lotes data from Firebase
 
-        setLotes(lotesData);
+        // Lotes data is managed by useOfflineData hook
       }
     } catch (error) {
       console.error('Error loading lotes:', error);
