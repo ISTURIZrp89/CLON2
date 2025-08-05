@@ -205,7 +205,7 @@ const Productos = () => {
         const result = await firebaseService.delete('productos', producto.id);
         if (result.success) {
           showSuccess('Éxito', 'Producto eliminado correctamente');
-          await loadProductos();
+          await refresh();
         } else {
           showError('Error', 'No se pudo eliminar el producto');
         }
@@ -985,7 +985,7 @@ const Productos = () => {
                     <option value="activo">Activo</option>
                     <option value="inactivo">Inactivo</option>
                     <option value="mantenimiento">En Mantenimiento</option>
-                    <option value="reparacion">En Reparaci��n</option>
+                    <option value="reparacion">En Reparación</option>
                     <option value="baja">Dado de Baja</option>
                   </select>
                 </div>
