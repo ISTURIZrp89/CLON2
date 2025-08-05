@@ -48,10 +48,7 @@ const Insumos = () => {
 
   const [filteredInsumos, setFilteredInsumos] = useState([]);
 
-  // Compatibility para código legacy
-  const setLoading = () => {}; // No-op ya que loading viene del hook
-  const setInsumos = () => {}; // No-op ya que insumos viene del hook
-  const setLotes = () => {}; // No-op ya que lotes viene del hook
+  // Compatibility para código legacy - removed to prevent conflicts with useOfflineData hook
   const [showModal, setShowModal] = useState(false);
   const [editingInsumo, setEditingInsumo] = useState(null);
   const [expandedLotes, setExpandedLotes] = useState({});
