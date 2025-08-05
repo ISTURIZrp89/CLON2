@@ -14,6 +14,15 @@ import Insumos from './pages/Insumos/Insumos';
 import Equipos from './pages/Equipos/Equipos';
 import Productos from './pages/Productos/Productos';
 import Pedidos from './pages/Pedidos/Pedidos';
+import RegistroPedidos from './pages/RegistroPedidos/RegistroPedidos';
+import Envios from './pages/Envios/Envios';
+import Movimientos from './pages/Movimientos/Movimientos';
+import Reportes from './pages/Reportes/Reportes';
+import HistorialEquipos from './pages/HistorialEquipos/HistorialEquipos';
+import Configuracion from './pages/Configuracion/Configuracion';
+import Ajustes from './pages/Ajustes/Ajustes';
+import Perfil from './pages/Perfil/Perfil';
+import Migracion from './pages/Migracion/Migracion';
 import './App.css';
 
 function App() {
@@ -82,6 +91,78 @@ function App() {
                   <ProtectedRoute>
                     <Layout>
                       <Pedidos />
+                    </Layout>
+                  </ProtectedRoute>
+                } />
+                
+                <Route path="/registro-pedidos" element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <RegistroPedidos />
+                    </Layout>
+                  </ProtectedRoute>
+                } />
+                
+                <Route path="/envios" element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <Envios />
+                    </Layout>
+                  </ProtectedRoute>
+                } />
+                
+                <Route path="/movimientos" element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <Movimientos />
+                    </Layout>
+                  </ProtectedRoute>
+                } />
+                
+                <Route path="/reportes" element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <Reportes />
+                    </Layout>
+                  </ProtectedRoute>
+                } />
+                
+                <Route path="/historial-equipos" element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <HistorialEquipos />
+                    </Layout>
+                  </ProtectedRoute>
+                } />
+                
+                <Route path="/configuracion" element={
+                  <ProtectedRoute requiredRole="administrador">
+                    <Layout>
+                      <Configuracion />
+                    </Layout>
+                  </ProtectedRoute>
+                } />
+                
+                <Route path="/ajustes" element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <Ajustes />
+                    </Layout>
+                  </ProtectedRoute>
+                } />
+                
+                <Route path="/perfil" element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <Perfil />
+                    </Layout>
+                  </ProtectedRoute>
+                } />
+
+                <Route path="/migracion" element={
+                  <ProtectedRoute requiredRole="administrador">
+                    <Layout>
+                      <Migracion />
                     </Layout>
                   </ProtectedRoute>
                 } />
