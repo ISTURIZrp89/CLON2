@@ -133,7 +133,6 @@ const Insumos = () => {
 
   const loadInsumos = async () => {
     try {
-      setLoading(true);
       const result = await firebaseService.getAll('insumos');
       if (result.success) {
         let insumosData = result.data || [];
