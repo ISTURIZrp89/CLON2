@@ -14,11 +14,7 @@ const Productos = () => {
     data: productos,
     loading,
     error,
-    fromCache,
     refresh,
-    createDocument,
-    updateDocument,
-    deleteDocument,
     isOffline
   } = useOfflineData('productos', {
     orderBy: 'nombre',
