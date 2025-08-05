@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useNotification } from '../../contexts/NotificationContext';
 import ConnectionStatus from '../../components/UI/ConnectionStatus';
