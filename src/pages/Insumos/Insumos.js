@@ -286,7 +286,6 @@ const Insumos = () => {
     }
 
     try {
-      setLoading(true);
       const loteData = {
         lote: loteForm.lote,
         existencia: parseInt(loteForm.existencia) || 0,
