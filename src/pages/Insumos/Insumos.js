@@ -209,8 +209,6 @@ const Insumos = () => {
     } catch (error) {
       console.error('Error loading insumos:', error);
       showError('Error', 'Error al cargar insumos');
-    } finally {
-      setLoading(false);
     }
   };
 
