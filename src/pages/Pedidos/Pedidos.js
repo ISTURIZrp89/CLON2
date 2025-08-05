@@ -204,26 +204,7 @@ const Pedidos = () => {
     });
   };
 
-  const handleAddArticuloFromInventory = (insumo) => {
-    const newArticulo = {
-      tipo: 'inventario',
-      insumo_id: insumo.id,
-      nombre: insumo.nombre,
-      descripcion: `Código: ${insumo.codigo} - Categoría: ${insumo.categoria}`,
-      especificaciones: insumo.observaciones || '',
-      cantidad_solicitada: 1,
-      cantidad_disponible: insumo.existencia_total || 0,
-      precio_estimado: insumo.precio_venta || 0,
-      proveedor_sugerido: insumo.proveedor || '',
-      urgente: false,
-      unidad_medida: insumo.unidad_medida || ''
-    };
-    
-    setFormData({
-      ...formData,
-      articulos: [...formData.articulos, newArticulo]
-    });
-  };
+
 
   const copyFromDraft = (borrador) => {
     setFormData({
