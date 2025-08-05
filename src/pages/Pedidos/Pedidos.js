@@ -109,7 +109,6 @@ const Pedidos = () => {
     }
 
     try {
-      setLoading(true);
       const requisicionData = {
         ...formData,
         numero: formData.numero || generateOrderNumber(),
