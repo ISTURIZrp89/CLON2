@@ -268,7 +268,7 @@ const Insumos = () => {
           }
 
           await loadLotes();
-          await loadInsumos();
+          await refresh();
         } else {
           showError('Error', 'No se pudo eliminar el lote');
         }
@@ -315,7 +315,7 @@ const Insumos = () => {
           }
 
           await loadLotes();
-          await loadInsumos();
+          await refresh();
           handleCloseLoteModal();
         } else {
           showError('Error', 'No se pudo actualizar el lote');
@@ -340,7 +340,7 @@ const Insumos = () => {
           }
 
           await loadLotes();
-          await loadInsumos();
+          await refresh();
           handleCloseLoteModal();
         } else {
           showError('Error', 'No se pudo crear el lote');
@@ -426,7 +426,7 @@ const Insumos = () => {
             showWarning('Éxito parcial', 'Insumo actualizado pero hubo problemas creando los movimientos');
           }
 
-          await loadInsumos();
+          await refresh();
           await loadLotes();
           handleCloseModal();
         } else {
@@ -456,7 +456,7 @@ const Insumos = () => {
             showSuccess('Éxito', 'Insumo creado correctamente');
           }
 
-          await loadInsumos();
+          await refresh();
           await loadLotes();
           handleCloseModal();
         } else {
@@ -497,7 +497,7 @@ const Insumos = () => {
         if (result.success) {
           showSuccess('Éxito', 'Insumo eliminado correctamente');
           // Force reload after deletion
-          await loadInsumos();
+          await refresh();
           await loadLotes(); // Also reload lotes in case they were related
         } else {
           showError('Error', 'No se pudo eliminar el insumo');
@@ -582,7 +582,7 @@ const Insumos = () => {
                 );
                 if (result.success) {
                   showSuccess('Sincronización completa', `Procesados: ${result.results.processed}, Actualizados: ${result.results.updated}`);
-                  await loadInsumos();
+                  await refresh();
                   await loadLotes();
                 } else {
                   showError('Error', 'Error en la sincronización: ' + result.error);
