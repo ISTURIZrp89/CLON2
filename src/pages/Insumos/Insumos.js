@@ -478,7 +478,7 @@ const Insumos = () => {
           showSuccess('Éxito', 'Insumo eliminado correctamente');
           // Force reload after deletion
           await refresh();
-          // loadLotes call removed - data managed by useOfflineData hook // Also reload lotes in case they were related
+          // loadLotes call removed - data managed by useOfflineData hook
         } else {
           showError('Error', 'No se pudo eliminar el insumo');
         }
