@@ -136,7 +136,6 @@ const Productos = () => {
     }
 
     try {
-      setLoading(true);
       const productoData = {
         ...formData,
         codigo: codigo,
