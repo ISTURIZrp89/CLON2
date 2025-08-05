@@ -69,9 +69,8 @@ const Pedidos = () => {
   }, [showError]);
 
   useEffect(() => {
-    loadPedidos();
-    loadInsumos();
-  }, [loadPedidos, loadInsumos]);
+    loadBorradores();
+  }, [loadBorradores]);
 
   useEffect(() => {
     if (userData?.nombre && !formData.solicitante) {
