@@ -49,26 +49,7 @@ const Equipos = () => {
     especificaciones: ''
   });
 
-  useEffect(() => {
-    loadEquipos();
-  }, []);
-
-  const loadEquipos = async () => {
-    try {
-      setLoading(true);
-      const result = await firebaseService.getAll('equipos');
-      if (result.success) {
-        setEquipos(result.data || []);
-      } else {
-        showError('Error', 'No se pudieron cargar los equipos');
-      }
-    } catch (error) {
-      console.error('Error loading equipos:', error);
-      showError('Error', 'Error al cargar equipos');
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Los equipos se cargan automáticamente a través del hook useOfflineData
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -408,7 +389,7 @@ const Equipos = () => {
                 </div>
                 
                 <div className="form-group">
-                  <label htmlFor="categoria">Categoría *</label>
+                  <label htmlFor="categoria">Categor��a *</label>
                   <select
                     id="categoria"
                     value={formData.categoria}
