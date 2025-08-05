@@ -48,10 +48,7 @@ const Insumos = () => {
 
   const [filteredInsumos, setFilteredInsumos] = useState([]);
 
-  // Compatibility para código legacy
-  const setLoading = () => {}; // No-op ya que loading viene del hook
-  const setInsumos = () => {}; // No-op ya que insumos viene del hook
-  const setLotes = () => {}; // No-op ya que lotes viene del hook
+  // Compatibility para código legacy - removed to prevent conflicts with useOfflineData hook
   const [showModal, setShowModal] = useState(false);
   const [editingInsumo, setEditingInsumo] = useState(null);
   const [expandedLotes, setExpandedLotes] = useState({});
@@ -136,7 +133,6 @@ const Insumos = () => {
 
   const loadInsumos = async () => {
     try {
-      setLoading(true);
       const result = await firebaseService.getAll('insumos');
       if (result.success) {
         let insumosData = result.data || [];
@@ -200,37 +196,18 @@ const Insumos = () => {
           }
         }
 
-        setInsumos(insumosData);
-        setFilteredInsumos(insumosData);
-
-        // Load lotes after insumos are set
-        if (insumosData.length > 0) {
-          loadLotes(insumosData);
-        }
+        // setFilteredInsumos(insumosData); - handled by useEffect hook
+        // loadLotes call removed - data managed by useOfflineData hook
       } else {
         showError('Error', 'No se pudieron cargar los insumos');
       }
     } catch (error) {
       console.error('Error loading insumos:', error);
       showError('Error', 'Error al cargar insumos');
-    } finally {
-      setLoading(false);
     }
   };
 
-  const loadLotes = async (insumosData = null) => {
-    try {
-      const result = await firebaseService.getAll('lotes');
-      if (result.success) {
-        let lotesData = result.data || [];
-        // Real lotes data from Firebase
-
-        setLotes(lotesData);
-      }
-    } catch (error) {
-      console.error('Error loading lotes:', error);
-    }
-  };
+  // loadLotes removed - data loading is handled by useOfflineData hook
 
   const getLotesForInsumo = (insumoId) => {
     return lotes.filter(lote => lote.insumo_id === insumoId);
@@ -273,8 +250,7 @@ const Insumos = () => {
             showWarning('Éxito parcial', 'Lote eliminado pero hubo problemas en la sincronización');
           }
 
-          await loadLotes();
-          await loadInsumos();
+          await refresh();
         } else {
           showError('Error', 'No se pudo eliminar el lote');
         }
@@ -292,7 +268,6 @@ const Insumos = () => {
     }
 
     try {
-      setLoading(true);
       const loteData = {
         lote: loteForm.lote,
         existencia: parseInt(loteForm.existencia) || 0,
@@ -321,8 +296,7 @@ const Insumos = () => {
             showWarning('Éxito parcial', 'Lote actualizado pero hubo problemas en la sincronización');
           }
 
-          await loadLotes();
-          await loadInsumos();
+          await refresh();
           handleCloseLoteModal();
         } else {
           showError('Error', 'No se pudo actualizar el lote');
@@ -346,8 +320,7 @@ const Insumos = () => {
             showWarning('Éxito parcial', 'Lote creado pero hubo problemas en la sincronización');
           }
 
-          await loadLotes();
-          await loadInsumos();
+          await refresh();
           handleCloseLoteModal();
         } else {
           showError('Error', 'No se pudo crear el lote');
@@ -357,8 +330,6 @@ const Insumos = () => {
     } catch (error) {
       console.error('Error saving lote:', error);
       showError('Error', 'Error al guardar el lote');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -401,7 +372,6 @@ const Insumos = () => {
     }
 
     try {
-      setLoading(true);
       const insumoData = {
         ...formData,
         codigo: codigo,
@@ -436,8 +406,8 @@ const Insumos = () => {
             showWarning('Éxito parcial', 'Insumo actualizado pero hubo problemas creando los movimientos');
           }
 
-          await loadInsumos();
-          await loadLotes();
+          await refresh();
+          // loadLotes call removed - data managed by useOfflineData hook
           handleCloseModal();
         } else {
           showError('Error', 'No se pudo actualizar el insumo');
@@ -466,8 +436,8 @@ const Insumos = () => {
             showSuccess('Éxito', 'Insumo creado correctamente');
           }
 
-          await loadInsumos();
-          await loadLotes();
+          await refresh();
+          // loadLotes call removed - data managed by useOfflineData hook
           handleCloseModal();
         } else {
           showError('Error', 'No se pudo crear el insumo');
@@ -477,8 +447,6 @@ const Insumos = () => {
     } catch (error) {
       console.error('Error saving insumo:', error);
       showError('Error', 'Error al guardar el insumo');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -509,8 +477,8 @@ const Insumos = () => {
         if (result.success) {
           showSuccess('Éxito', 'Insumo eliminado correctamente');
           // Force reload after deletion
-          await loadInsumos();
-          await loadLotes(); // Also reload lotes in case they were related
+          await refresh();
+          // loadLotes call removed - data managed by useOfflineData hook
         } else {
           showError('Error', 'No se pudo eliminar el insumo');
         }
@@ -574,8 +542,7 @@ const Insumos = () => {
             variant="secondary"
             icon="mdi-refresh"
             onClick={() => {
-              loadInsumos();
-              loadLotes();
+              refresh();
               showSuccess('Actualizado', 'Lista de insumos actualizada');
             }}
           >
@@ -594,8 +561,7 @@ const Insumos = () => {
                 );
                 if (result.success) {
                   showSuccess('Sincronización completa', `Procesados: ${result.results.processed}, Actualizados: ${result.results.updated}`);
-                  await loadInsumos();
-                  await loadLotes();
+                  await refresh();
                 } else {
                   showError('Error', 'Error en la sincronización: ' + result.error);
                 }

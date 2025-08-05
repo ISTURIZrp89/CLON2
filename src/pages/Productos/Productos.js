@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNotification } from '../../contexts/NotificationContext';
 import firebaseService from '../../services/FirebaseService';
 import Button from '../../components/UI/Button';
-import ConnectionStatus from '../../components/UI/ConnectionStatus';
+
 import useOfflineData from '../../hooks/useOfflineData';
 import './Productos.css';
 
@@ -14,12 +14,7 @@ const Productos = () => {
     data: productos,
     loading,
     error,
-    fromCache,
-    refresh,
-    createDocument,
-    updateDocument,
-    deleteDocument,
-    isOffline
+    refresh
   } = useOfflineData('productos', {
     orderBy: 'nombre',
     orderDirection: 'asc',
@@ -72,11 +67,7 @@ const Productos = () => {
     }
   }, [error, showError]);
 
-  // Función de refresh
-  const handleRefresh = () => {
-    refresh();
-    showSuccess('Actualizado', `Productos actualizados ${isOffline ? '(modo offline)' : ''}`);
-  };
+
 
   // Search filtering effect
   useEffect(() => {
@@ -106,114 +97,7 @@ const Productos = () => {
     setSearchTerm('');
   };
 
-  const loadProductos = async () => {
-    try {
-      setLoading(true);
-      const result = await firebaseService.getAll('productos');
-      if (result.success) {
-        let productosData = result.data || [];
-
-        // If no productos exist, create some sample data
-        if (productosData.length === 0) {
-          const sampleProductos = [
-            {
-              codigo: 'LAB001',
-              nombre: 'Microscopio Óptico Binocular',
-              categoria: 'equipos_opticos',
-              descripcion: 'Microscopio óptico binocular con objetivos 4x, 10x, 40x, 100x',
-              precio_costo: 1200.00,
-              precio_venta: 1800.00,
-              existencia_actual: 5,
-              existencia_minima: 2,
-              existencia_maxima: 10,
-              ubicacion_almacen: 'ALM-A1-001',
-              proveedor: 'LabTech Solutions',
-              marca: 'Olympus',
-              modelo: 'CX23',
-              numero_serie: 'OLY-CX23-001',
-              fecha_adquisicion: '2024-01-15',
-              estado: 'activo'
-            },
-            {
-              codigo: 'LAB002',
-              nombre: 'Balanza Analítica Digital',
-              categoria: 'instrumentos_medicion',
-              descripcion: 'Balanza analítica digital de precisión 0.1mg, capacidad 220g',
-              precio_costo: 850.00,
-              precio_venta: 1200.00,
-              existencia_actual: 3,
-              existencia_minima: 1,
-              existencia_maxima: 5,
-              ubicacion_almacen: 'ALM-B2-015',
-              proveedor: 'Precision Instruments',
-              marca: 'Sartorius',
-              modelo: 'Entris224-1S',
-              numero_serie: 'SAR-ENT-002',
-              fecha_adquisicion: '2024-02-20',
-              estado: 'activo'
-            },
-            {
-              codigo: 'LAB003',
-              nombre: 'Centrifuga de Mesa',
-              categoria: 'equipos_separacion',
-              descripcion: 'Centrifuga de mesa con rotor para tubos de 15ml y 50ml',
-              precio_costo: 650.00,
-              precio_venta: 950.00,
-              existencia_actual: 2,
-              existencia_minima: 1,
-              existencia_maxima: 4,
-              ubicacion_almacen: 'ALM-C1-008',
-              proveedor: 'BioTech Equipment',
-              marca: 'Eppendorf',
-              modelo: '5702',
-              numero_serie: 'EPP-5702-001',
-              fecha_adquisicion: '2024-03-10',
-              estado: 'activo'
-            },
-            {
-              codigo: 'LAB004',
-              nombre: 'pH-metro Digital',
-              categoria: 'instrumentos_medicion',
-              descripcion: 'pH-metro digital portátil con electrodo de vidrio',
-              precio_costo: 180.00,
-              precio_venta: 280.00,
-              existencia_actual: 8,
-              existencia_minima: 3,
-              existencia_maxima: 15,
-              ubicacion_almacen: 'ALM-A2-012',
-              proveedor: 'Analytical Devices Inc',
-              marca: 'Hanna',
-              modelo: 'HI-2020',
-              numero_serie: 'HAN-2020-004',
-              fecha_adquisicion: '2024-01-25',
-              estado: 'activo'
-            }
-          ];
-
-          for (const producto of sampleProductos) {
-            try {
-              const createResult = await firebaseService.create('productos', producto);
-              if (createResult.success) {
-                productosData.push({ ...producto, id: createResult.id });
-              }
-            } catch (err) {
-              console.log('Sample producto creation:', err.message);
-            }
-          }
-        }
-
-        setProductos(productosData);
-        setFilteredProductos(productosData);
-      } else {
-        showError('Error', 'No se pudieron cargar los productos');
-      }
-    } catch (error) {
-      console.error('Error loading productos:', error);
-      showError('Error', 'Error al cargar productos');
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Los productos se cargan automáticamente a través del hook useOfflineData
 
   const generateProductCode = async () => {
     const prefix = 'PROD';
@@ -243,7 +127,6 @@ const Productos = () => {
     }
 
     try {
-      setLoading(true);
       const productoData = {
         ...formData,
         codigo: codigo,
@@ -274,13 +157,11 @@ const Productos = () => {
         }
       }
 
-      await loadProductos();
+      await refresh();
       handleCloseModal();
     } catch (error) {
       console.error('Error saving producto:', error);
       showError('Error', 'Error al guardar el producto');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -315,7 +196,7 @@ const Productos = () => {
         const result = await firebaseService.delete('productos', producto.id);
         if (result.success) {
           showSuccess('Éxito', 'Producto eliminado correctamente');
-          await loadProductos();
+          await refresh();
         } else {
           showError('Error', 'No se pudo eliminar el producto');
         }
@@ -436,8 +317,6 @@ const Productos = () => {
     }
 
     try {
-      setLoading(true);
-
       const pedidoData = {
         numero: generateOrderNumber(),
         tipo: 'productos',
@@ -485,8 +364,6 @@ const Productos = () => {
     } catch (error) {
       console.error('Error creating order:', error);
       showError('Error', 'Error al crear el pedido');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -530,7 +407,7 @@ const Productos = () => {
                 variant="secondary"
                 icon="mdi-refresh"
                 onClick={() => {
-                  loadProductos();
+                  refresh();
                   showSuccess('Actualizado', 'Lista de productos actualizada');
                 }}
               >

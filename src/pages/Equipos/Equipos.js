@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNotification } from '../../contexts/NotificationContext';
 import firebaseService from '../../services/FirebaseService';
 import DataTable from '../../components/UI/DataTable';
@@ -7,18 +7,13 @@ import ConnectionStatus from '../../components/UI/ConnectionStatus';
 import useOfflineData from '../../hooks/useOfflineData';
 
 const Equipos = () => {
-  const { showSuccess, showError, showWarning } = useNotification();
+  const { showSuccess, showError } = useNotification();
 
   // Hook de persistencia offline
   const {
     data: equipos,
     loading,
-    error,
-    refresh,
-    createDocument,
-    updateDocument,
-    deleteDocument,
-    isOffline
+    refresh
   } = useOfflineData('equipos', {
     orderBy: 'nombre',
     orderDirection: 'asc',
@@ -49,26 +44,7 @@ const Equipos = () => {
     especificaciones: ''
   });
 
-  useEffect(() => {
-    loadEquipos();
-  }, []);
-
-  const loadEquipos = async () => {
-    try {
-      setLoading(true);
-      const result = await firebaseService.getAll('equipos');
-      if (result.success) {
-        setEquipos(result.data || []);
-      } else {
-        showError('Error', 'No se pudieron cargar los equipos');
-      }
-    } catch (error) {
-      console.error('Error loading equipos:', error);
-      showError('Error', 'Error al cargar equipos');
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Los equipos se cargan automáticamente a través del hook useOfflineData
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,7 +55,6 @@ const Equipos = () => {
     }
 
     try {
-      setLoading(true);
       const equipoData = {
         ...formData,
         costo_adquisicion: parseFloat(formData.costo_adquisicion) || 0,
@@ -104,13 +79,11 @@ const Equipos = () => {
         }
       }
 
-      await loadEquipos();
+      await refresh();
       handleCloseModal();
     } catch (error) {
       console.error('Error saving equipo:', error);
       showError('Error', 'Error al guardar el equipo');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -145,7 +118,7 @@ const Equipos = () => {
         const result = await firebaseService.delete('equipos', equipo.id);
         if (result.success) {
           showSuccess('Éxito', 'Equipo eliminado correctamente');
-          await loadEquipos();
+          await refresh();
         } else {
           showError('Error', 'No se pudo eliminar el equipo');
         }
@@ -179,7 +152,7 @@ const Equipos = () => {
       });
 
       showSuccess('Éxito', 'Mantenimiento registrado correctamente');
-      await loadEquipos();
+      await refresh();
     } catch (error) {
       console.error('Error registering maintenance:', error);
       showError('Error', 'Error al registrar el mantenimiento');

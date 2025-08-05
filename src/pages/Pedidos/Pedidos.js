@@ -33,7 +33,6 @@ const Pedidos = () => {
   const pedidos = pedidosData.data;
   const insumos = insumosData.data;
   const loading = pedidosData.loading || insumosData.loading;
-  const isOffline = pedidosData.isOffline || insumosData.isOffline;
 
   const [borradores, setBorradores] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -53,40 +52,24 @@ const Pedidos = () => {
     notas: ''
   });
 
-  const loadPedidos = useCallback(async () => {
+  const loadBorradores = useCallback(async () => {
     try {
-      setLoading(true);
       const result = await firebaseService.getAll('requisiciones');
       if (result.success) {
         const allRequisiciones = result.data || [];
-        setPedidos(allRequisiciones.filter(req => req.estado !== 'borrador'));
         setBorradores(allRequisiciones.filter(req => req.estado === 'borrador'));
       } else {
-        showError('Error', 'No se pudieron cargar las requisiciones');
+        showError('Error', 'No se pudieron cargar los borradores');
       }
     } catch (error) {
-      console.error('Error loading requisiciones:', error);
-      showError('Error', 'Error al cargar requisiciones');
-    } finally {
-      setLoading(false);
+      console.error('Error loading borradores:', error);
+      showError('Error', 'Error al cargar borradores');
     }
   }, [showError]);
 
-  const loadInsumos = useCallback(async () => {
-    try {
-      const result = await firebaseService.getAll('insumos');
-      if (result.success) {
-        setInsumos(result.data || []);
-      }
-    } catch (error) {
-      console.error('Error loading insumos:', error);
-    }
-  }, []);
-
   useEffect(() => {
-    loadPedidos();
-    loadInsumos();
-  }, [loadPedidos, loadInsumos]);
+    loadBorradores();
+  }, [loadBorradores]);
 
   useEffect(() => {
     if (userData?.nombre && !formData.solicitante) {
@@ -125,7 +108,6 @@ const Pedidos = () => {
     }
 
     try {
-      setLoading(true);
       const requisicionData = {
         ...formData,
         numero: formData.numero || generateOrderNumber(),
@@ -156,13 +138,12 @@ const Pedidos = () => {
         }
       }
 
-      await loadPedidos();
+      await pedidosData.refresh();
+      await loadBorradores();
       handleCloseModal();
     } catch (error) {
       console.error('Error saving pedido:', error);
       showError('Error', 'Error al guardar el pedido');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -192,7 +173,8 @@ const Pedidos = () => {
         const result = await firebaseService.delete('requisiciones', pedido.id);
         if (result.success) {
           showSuccess('Éxito', 'Pedido eliminado correctamente');
-          await loadPedidos();
+          await pedidosData.refresh();
+          await loadBorradores();
         } else {
           showError('Error', 'No se pudo eliminar el pedido');
         }
@@ -222,26 +204,7 @@ const Pedidos = () => {
     });
   };
 
-  const handleAddArticuloFromInventory = (insumo) => {
-    const newArticulo = {
-      tipo: 'inventario',
-      insumo_id: insumo.id,
-      nombre: insumo.nombre,
-      descripcion: `Código: ${insumo.codigo} - Categoría: ${insumo.categoria}`,
-      especificaciones: insumo.observaciones || '',
-      cantidad_solicitada: 1,
-      cantidad_disponible: insumo.existencia_total || 0,
-      precio_estimado: insumo.precio_venta || 0,
-      proveedor_sugerido: insumo.proveedor || '',
-      urgente: false,
-      unidad_medida: insumo.unidad_medida || ''
-    };
-    
-    setFormData({
-      ...formData,
-      articulos: [...formData.articulos, newArticulo]
-    });
-  };
+
 
   const copyFromDraft = (borrador) => {
     setFormData({
