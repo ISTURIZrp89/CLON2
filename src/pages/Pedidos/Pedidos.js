@@ -174,7 +174,8 @@ const Pedidos = () => {
         const result = await firebaseService.delete('requisiciones', pedido.id);
         if (result.success) {
           showSuccess('Éxito', 'Pedido eliminado correctamente');
-          await loadPedidos();
+          await pedidosData.refresh();
+          await loadBorradores();
         } else {
           showError('Error', 'No se pudo eliminar el pedido');
         }
