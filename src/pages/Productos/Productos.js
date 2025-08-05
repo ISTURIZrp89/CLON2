@@ -373,8 +373,6 @@ const Productos = () => {
     } catch (error) {
       console.error('Error creating order:', error);
       showError('Error', 'Error al crear el pedido');
-    } finally {
-      setLoading(false);
     }
   };
 
